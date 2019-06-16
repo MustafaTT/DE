@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3E71CD53-6A76-4563-A961-562F117EEA9B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DossierExplorer</RootNamespace>
+    <AssemblyName>DossierExplorer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+    <IncludeIisSettings>true</IncludeIisSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <IncludeIisSettings>true</IncludeIisSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AttributeRouting, Version=3.5.6.0, Culture=neutral, PublicKeyToken=c10f85d521a011a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AttributeRouting.Core.3.5.6\lib\net40\AttributeRouting.dll</HintPath>
+    </Reference>
+    <Reference Include="AttributeRouting.Web, Version=3.5.6.0, Culture=neutral, PublicKeyToken=c10f85d521a011a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AttributeRouting.Core.Web.3.5.6\lib\net40\AttributeRouting.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="AttributeRouting.Web.Mvc, Version=3.5.6.0, Culture=neutral, PublicKeyToken=c10f85d521a011a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AttributeRouting.3.5.6\lib\net40\AttributeRouting.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.2\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.7.2\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.AWT.WinForms, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.AWT.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Beans, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Beans.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Charsets, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Charsets.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Cldrdata, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Cldrdata.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Corba, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Corba.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Jdbc, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Jdbc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Localedata, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Localedata.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Management, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Management.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Media, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Misc, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Misc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Naming, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Naming.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Nashorn, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Nashorn.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Remoting, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Remoting.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Security, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.SwingAWT, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.SwingAWT.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Tools, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Util, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Bind, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Bind.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Crypto, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Parse, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Parse.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Transform, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Transform.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.WebServices, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.XPath, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime.JNI, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.JNI.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.9.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.9.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvc.Bootstrap.Datatables.MVC5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.Bootstrap.Datatables.MVC5.1.0.4\lib\Mvc.Bootstrap.Datatables.MVC5.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\T4MVCExtensions.4.2.1\lib\net45\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="TikaOnDotNet, Version=1.17.1.0, Culture=neutral, PublicKeyToken=fd70f0f601f583f3, processorArchitecture=MSIL">
+      <HintPath>..\packages\TikaOnDotnet.TextExtractor.1.17.1\lib\TikaOnDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="TikaOnDotNet.TextExtraction, Version=1.17.1.0, Culture=neutral, PublicKeyToken=fd70f0f601f583f3, processorArchitecture=MSIL">
+      <HintPath>..\packages\TikaOnDotnet.TextExtractor.1.17.1\lib\TikaOnDotNet.TextExtraction.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AttributeRoutingConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RegisterDatatablesModelBinder.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="FileController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileExplorer\Facade\FileSystemDriver.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LuceneIndexController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="FileExplorer\DownloadFileResult.cs" />
+    <Compile Include="FileExplorer\DTO\DirectoryDTO.cs" />
+    <Compile Include="FileExplorer\DTO\DTOBase.cs" />
+    <Compile Include="FileExplorer\DTO\Error.cs" />
+    <Compile Include="FileExplorer\DTO\FileDTO.cs" />
+    <Compile Include="FileExplorer\DTO\ImageDTO.cs" />
+    <Compile Include="FileExplorer\DTO\RootDTO.cs" />
+    <Compile Include="FileExplorer\Facade\Connector.cs" />
+    <Compile Include="FileExplorer\Facade\FullPath.cs" />
+    <Compile Include="FileExplorer\Facade\IDriver.cs" />
+    <Compile Include="FileExplorer\Facade\Root.cs" />
+    <Compile Include="FileExplorer\Helper.cs" />
+    <Compile Include="FileExplorer\HttpCacheHelper.cs" />
+    <Compile Include="FileExplorer\JsonDataContractResult.cs" />
+    <Compile Include="FileExplorer\Mime.cs" />
+    <Compile Include="FileExplorer\PicturesEditor\DefaultPicturesEditor.cs" />
+    <Compile Include="FileExplorer\PicturesEditor\ImageWithMime.cs" />
+    <Compile Include="FileExplorer\PicturesEditor\IPicturesEditor.cs" />
+    <Compile Include="FileExplorer\Response\AddResponse.cs" />
+    <Compile Include="FileExplorer\Response\ChangedResponse.cs" />
+    <Compile Include="FileExplorer\Response\DimResponse.cs" />
+    <Compile Include="FileExplorer\Response\GetResponse.cs" />
+    <Compile Include="FileExplorer\Response\ListResponse.cs" />
+    <Compile Include="FileExplorer\Response\Open\Debug.cs" />
+    <Compile Include="FileExplorer\Response\Open\InitResponse.cs" />
+    <Compile Include="FileExplorer\Response\Open\OpenResponse.cs" />
+    <Compile Include="FileExplorer\Response\Open\OpenResponseBase.cs" />
+    <Compile Include="FileExplorer\Response\Open\Options.cs" />
+    <Compile Include="FileExplorer\Response\PutResponse.cs" />
+    <Compile Include="FileExplorer\Response\RemoveResponse.cs" />
+    <Compile Include="FileExplorer\Response\ReplaceResponse.cs" />
+    <Compile Include="FileExplorer\Response\ThumbsResponse.cs" />
+    <Compile Include="FileExplorer\Response\TreeResponse.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LuceneIndexController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LuceneIndex\IndexCRUD.cs" />
+    <Compile Include="LuceneIndex\Models\IndexModel.cs" />
+    <Compile Include="ManageController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HangfireAuthorizationFilter.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\IndexContentViewModel.cs" />
+    <Compile Include="ViewModels\IndexRecordViewModel.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="T4MVC.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="TextExtractOCR\GhostscriptAPI.cs" />
+    <Compile Include="TextExtractOCR\Models\PdfFile.cs" />
+    <Compile Include="TextExtractOCR\OCR.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FileExplorer\mimeTypes.txt" />
+    <Content Include="App_Data\aspnet-DossierExplorer-20190515045413.mdf" />
+    <Content Include="App_Data\aspnet-DossierExplorer-20190515045413_log.ldf">
+      <DependentUpon>aspnet-DossierExplorer-20190515045413.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\Hangfire.mdf" />
+    <Content Include="App_Data\Hangfire_log.ldf">
+      <DependentUpon>Hangfire.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Datatables\bootstrap.datatables.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Icon\vectorpaint .png" />
+    <Content Include="Content\Icon\vectorpaint.jpeg" />
+    <Content Include="Content\Icon\vectorpaint.svg" />
+    <Content Include="Content\images\back123.jpg" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="DLLs\FSWatcher.dll" />
+    <Content Include="DLLs\gsdll32.dll" />
+    <Content Include="DLLs\gsdll64.dll" />
+    <Content Include="FileExplorer\Content\elfinder\css\elfinder.full.css" />
+    <Content Include="FileExplorer\Content\elfinder\css\elfinder.min.css" />
+    <Content Include="FileExplorer\Content\elfinder\css\theme.css" />
+    <Content Include="FileExplorer\Content\elfinder\img\arrows-active.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\arrows-normal.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\crop.gif" />
+    <Content Include="FileExplorer\Content\elfinder\img\dialogs.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\icons-big.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\icons-small.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\logo.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\progress.gif" />
+    <Content Include="FileExplorer\Content\elfinder\img\quicklook-bg.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\quicklook-icons.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\resize.png" />
+    <Content Include="FileExplorer\Content\elfinder\img\spinner-mini.gif" />
+    <Content Include="FileExplorer\Content\elfinder\img\toolbar.png" />
+    <Content Include="FileExplorer\Content\elfinder\js\elfinder.full.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\elfinder.min.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.ar.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.bg.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.ca.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.cs.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.de.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.el.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.es.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.fa.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.fr.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.hu.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.it.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.jp.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.ko.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.LANG.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.nl.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.no.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.pl.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.pt_BR.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.ru.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.tr.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.vi.js" />
+    <Content Include="FileExplorer\Content\elfinder\js\i18n\elfinder.zh_CN.js" />
+    <Content Include="FileExplorer\Content\elfinder\sounds\rm.wav" />
+    <Content Include="Content\Site.css" />
+    <Content Include="FileExplorer\Content\Site.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\css\theme-gray.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\css\theme-gray.min.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\css\theme-light.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\css\theme-light.min.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\css\theme.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\css\theme.min.css" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\icons\material.svg" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\images\icons-big.svg" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\images\icons-small.svg" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\images\loading.svg" />
+    <Content Include="FileExplorer\Content\themes\ui-default\jquery-ui.1.12.1.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery-ui.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.accordion.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.all.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.autocomplete.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.base.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.button.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.core.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.datepicker.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.dialog.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.progressbar.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.resizable.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.selectable.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.slider.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.tabs.css" />
+    <Content Include="FileExplorer\Content\themes\ui-lightness\jquery.ui.theme.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FileExplorer\Scripts\jquery-1.9.1.min.map" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\icons\material.eot" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\icons\material.ttf" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\icons\material.woff" />
+    <Content Include="FileExplorer\Content\themes\MyThemes\Material\icons\material.woff2" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\jquery-3.3.1.min.js" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\jquery.unobtrusive-ajax.min.custom.lucene.js" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper-utils.js" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper-utils.min.js" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper.js" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper.min.js" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper-utils.js.map" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper-utils.min.js.map" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper.js.map" />
+    <Content Include="LuceneIndex\ScriptsForLucenePages\popper.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\DataTables\bootstrap.datatables.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\jquery.ext.dataTables.js" />
+    <Content Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </Content>
+    <None Include="T4MVC.tt.hooks.t4" />
+    <None Include="T4MVC.tt.settings.xml" />
+    <None Include="FileExplorer\Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="FileExplorer\Scripts\jquery-1.9.1.js" />
+    <Content Include="FileExplorer\Scripts\jquery-1.9.1.min.js" />
+    <Content Include="FileExplorer\Scripts\jquery-ui-1.10.2.js" />
+    <Content Include="FileExplorer\Scripts\jquery-ui-1.10.2.min.js" />
+    <Content Include="FileExplorer\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="FileExplorer\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="FileExplorer\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="FileExplorer\Scripts\jquery.validate.js" />
+    <Content Include="FileExplorer\Scripts\jquery.validate.min.js" />
+    <Content Include="FileExplorer\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="FileExplorer\Scripts\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Tesseract\ambiguous_words.exe" />
+    <Content Include="Tesseract\classifier_tester.exe" />
+    <Content Include="Tesseract\cntraining.exe" />
+    <Content Include="Tesseract\combine_lang_model.exe" />
+    <Content Include="Tesseract\combine_tessdata.exe" />
+    <Content Include="Tesseract\dawg2wordlist.exe" />
+    <Content Include="Tesseract\iconv.dll" />
+    <Content Include="Tesseract\libbz2-1.dll" />
+    <Content Include="Tesseract\libcairo-2.dll" />
+    <Content Include="Tesseract\libexpat-1.dll" />
+    <Content Include="Tesseract\libffi-6.dll" />
+    <Content Include="Tesseract\libfontconfig-1.dll" />
+    <Content Include="Tesseract\libfreetype-6.dll" />
+    <Content Include="Tesseract\libgcc_s_seh-1.dll" />
+    <Content Include="Tesseract\libgif-7.dll" />
+    <Content Include="Tesseract\libglib-2.0-0.dll" />
+    <Content Include="Tesseract\libgobject-2.0-0.dll" />
+    <Content Include="Tesseract\libgomp-1.dll" />
+    <Content Include="Tesseract\libharfbuzz-0.dll" />
+    <Content Include="Tesseract\libintl-8.dll" />
+    <Content Include="Tesseract\libjbig-2.dll" />
+    <Content Include="Tesseract\libjpeg-8.dll" />
+    <Content Include="Tesseract\liblept-5.dll" />
+    <Content Include="Tesseract\liblzma-5.dll" />
+    <Content Include="Tesseract\libopenjp2.dll" />
+    <Content Include="Tesseract\libpango-1.0-0.dll" />
+    <Content Include="Tesseract\libpangocairo-1.0-0.dll" />
+    <Content Include="Tesseract\libpangoft2-1.0-0.dll" />
+    <Content Include="Tesseract\libpangowin32-1.0-0.dll" />
+    <Content Include="Tesseract\libpcre-1.dll" />
+    <Content Include="Tesseract\libpixman-1-0.dll" />
+    <Content Include="Tesseract\libpng16-16.dll" />
+    <Content Include="Tesseract\libstdc++-6.dll" />
+    <Content Include="Tesseract\libtesseract-4.dll" />
+    <Content Include="Tesseract\libtiff-5.dll" />
+    <Content Include="Tesseract\libwebp-7.dll" />
+    <Content Include="Tesseract\libwinpthread-1.dll" />
+    <Content Include="Tesseract\lstmeval.exe" />
+    <Content Include="Tesseract\lstmtraining.exe" />
+    <Content Include="Tesseract\merge_unicharsets.exe" />
+    <Content Include="Tesseract\mftraining.exe" />
+    <Content Include="Tesseract\set_unicharset_properties.exe" />
+    <Content Include="Tesseract\shapeclustering.exe" />
+    <Content Include="Tesseract\tessdata\jaxb-api-2.3.1.jar" />
+    <Content Include="Tesseract\tessdata\piccolo2d-core-3.0.jar" />
+    <Content Include="Tesseract\tessdata\piccolo2d-extras-3.0.jar" />
+    <Content Include="Tesseract\tessdata\ScrollView.jar" />
+    <Content Include="Tesseract\tesseract-uninstall.exe" />
+    <Content Include="Tesseract\tesseract.exe" />
+    <Content Include="Tesseract\text2image.exe" />
+    <Content Include="Tesseract\unicharset_extractor.exe" />
+    <Content Include="Tesseract\wordlist2dawg.exe" />
+    <Content Include="Tesseract\zlib1.dll" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Browser.cshtml" />
+    <Content Include="Views\Home\Files.cshtml" />
+    <Content Include="Views\Shared\FilesForm.cshtml" />
+    <Content Include="Tesseract\best tur\tur.traineddata" />
+    <Content Include="Tesseract\doc\AUTHORS" />
+    <Content Include="Tesseract\doc\LICENSE" />
+    <Content Include="Tesseract\doc\README.md" />
+    <Content Include="Tesseract\tessdataold\eng.traineddata" />
+    <Content Include="Tesseract\tessdataold\eng.user-patterns" />
+    <Content Include="Tesseract\tessdataold\eng.user-words" />
+    <Content Include="Tesseract\tessdataold\lstmold\eng.traineddata" />
+    <Content Include="Tesseract\tessdataold\lstmold\tur.traineddata" />
+    <Content Include="Tesseract\tessdataold\tur.traineddata" />
+    <Content Include="Tesseract\tessdata\1111turfast.traineddata" />
+    <Content Include="Tesseract\tessdata\configs\alto" />
+    <Content Include="Tesseract\tessdata\configs\ambigs.train" />
+    <Content Include="Tesseract\tessdata\configs\api_config" />
+    <Content Include="Tesseract\tessdata\configs\bigram" />
+    <Content Include="Tesseract\tessdata\configs\box.train" />
+    <Content Include="Tesseract\tessdata\configs\box.train.stderr" />
+    <Content Include="Tesseract\tessdata\configs\digits" />
+    <Content Include="Tesseract\tessdata\configs\get.images" />
+    <Content Include="Tesseract\tessdata\configs\hocr" />
+    <Content Include="Tesseract\tessdata\configs\inter" />
+    <Content Include="Tesseract\tessdata\configs\kannada" />
+    <Content Include="Tesseract\tessdata\configs\linebox" />
+    <Content Include="Tesseract\tessdata\configs\logfile" />
+    <Content Include="Tesseract\tessdata\configs\lstm.train" />
+    <Content Include="Tesseract\tessdata\configs\lstmbox" />
+    <Content Include="Tesseract\tessdata\configs\lstmdebug" />
+    <Content Include="Tesseract\tessdata\configs\makebox" />
+    <Content Include="Tesseract\tessdata\configs\pdf" />
+    <Content Include="Tesseract\tessdata\configs\quiet" />
+    <Content Include="Tesseract\tessdata\configs\rebox" />
+    <Content Include="Tesseract\tessdata\configs\strokewidth" />
+    <Content Include="Tesseract\tessdata\configs\tsv" />
+    <Content Include="Tesseract\tessdata\configs\txt" />
+    <Content Include="Tesseract\tessdata\configs\unlv" />
+    <Content Include="Tesseract\tessdata\configs\wordstrbox" />
+    <Content Include="Tesseract\tessdata\eng.traineddata" />
+    <Content Include="Tesseract\tessdata\pdf.ttf" />
+    <Content Include="Tesseract\tessdata\tessconfigs\batch" />
+    <Content Include="Tesseract\tessdata\tessconfigs\batch.nochop" />
+    <Content Include="Tesseract\tessdata\tessconfigs\matdemo" />
+    <Content Include="Tesseract\tessdata\tessconfigs\msdemo" />
+    <Content Include="Tesseract\tessdata\tessconfigs\nobatch" />
+    <Content Include="Tesseract\tessdata\tessconfigs\segdemo" />
+    <Content Include="Tesseract\tessdata\tur.traineddata" />
+    <Content Include="Views\LuceneIndex\LuceneIndex.cshtml" />
+    <Content Include="Views\LuceneIndex\_PartialUserSearchFiles.cshtml" />
+    <Content Include="Views\Home\Folder.cshtml" />
+    <Content Include="Views\LuceneIndex\_PartialContent.cshtml" />
+    <Content Include="Views\LuceneIndex\SearchInfo.cshtml" />
+    <Content Include="Views\LuceneIndex\FileBrowserInfo.cshtml" />
+    <Content Include="Views\LuceneIndex\_PartialTags.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LuceneIndex\TempImages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58423</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58423/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

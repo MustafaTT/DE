@@ -1,0 +1,283 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+
+/*body { background-color: #FFF; background-image: url('Content/images/back.jpg');
+
+       overflow: hidden; background-size: cover; background-position: center center; background-repeat: no-repeat; }
+
+    body,
+    html {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }*/
+
+    svg {
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+    }
+
+    #hit {
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+
+    @@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
+
+
+
+    .item-1,
+    .item-2,
+    .item-3 {
+        position: absolute;
+        display: block;
+        top: 2em;
+        width: 60%;
+        font-size: 2em;
+        animation-duration: 20s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    .item-1 {
+        animation-name: anim-1;
+    }
+
+    .item-2 {
+        animation-name: anim-2;
+    }
+
+    .item-3 {
+        animation-name: anim-3;
+    }
+
+    @@keyframes anim-1 {
+        0%, 8.3% {
+            left: -110%;
+            opacity: 0;
+        }
+
+        8.3%, 25% {
+            left: 25%;
+            opacity: 1;
+        }
+
+        33.33%, 100% {
+            left: 110%;
+            opacity: 0;
+        }
+    }
+
+    @@keyframes anim-2 {
+        0%, 33.33% {
+            left: -110%;
+            opacity: 0;
+        }
+
+        41.63%, 58.29% {
+            left: 25%;
+            opacity: 1;
+        }
+
+        66.66%, 100% {
+            left: 110%;
+            opacity: 0;
+        }
+    }
+
+    @@keyframes anim-3 {
+        0%, 66.66% {
+            left: -110%;
+            opacity: 0;
+        }
+
+        74.96%, 91.62% {
+            left: 25%;
+            opacity: 1;
+        }
+
+        100% {
+            left: 110%;
+            opacity: 0;
+        }
+    }
+</style>
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+            <p class="item-1" style="color:#0099cc">Welcome To DossExp</p>
+
+            <p class="item-2" style="color:#0099cc">Welcome To DossExp</p>
+
+            <p class="item-3" style="color:#0099cc">Welcome To DossExp</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+
+                <a href="~/LuceneIndex/LuceneIndex">
+
+                    <defs>
+                        <linearGradient id="magGrad" gradientUnits="userSpaceOnUse" x1="287.0869" y1="227.6745" x2="533.7535" y2="385.6746">
+                            <stop offset="0" style="stop-color:#0BD3F6" />
+                            <stop offset="1" style="stop-color:#2998D5" />
+                        </linearGradient>
+                    </defs>
+                    <g id="wholeGroup" fill="url(#magGrad)" stroke="url(#magGrad)">
+                        <line id="handle" fill="none" stroke-width="30" stroke-linecap="round" stroke-miterlimit="10" x1="466.5" y1="373.4" x2="577.7" y2="484.7" />
+                        <path id="outerRing" stroke-linecap="round" fill="none" stroke-width="22" stroke-miterlimit="10" d="M464.9,368.6
+	c-29.6,28.1-75.2,34.6-112.3,13.1c-45.1-26.1-60.5-83.9-34.3-129c26.1-45.1,83.9-60.5,129-34.3s60.5,83.9,34.3,129
+	C477,355.4,471.4,362.5,464.9,368.6" />
+                        <circle id="startCircle" stroke="none" cx="400" cy="300" r="94.4" />
+                        <path id="shine" fill="none" stroke-width="10" stroke-linecap="round" stroke-miterlimit="10" d="M386.3,238.3
+	c26.6-5.9,55.1,6,68.9,31.1" />
+                        <circle id="hit" stroke="none" fill="rgba(34,123,45,0)" cx="400" cy="300" r="110" />
+
+                    </g>
+
+                </a>
+
+            </svg>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+    var xmlns = "http://www.w3.org/2000/svg",
+        xlinkns = "http://www.w3.org/1999/xlink",
+        select = function (s) {
+            return document.querySelector(s);
+        },
+        selectAll = function (s) {
+            return document.querySelectorAll(s);
+        },
+        outerRing = select('#outerRing'),
+        handle = select('#handle'),
+        startCircle = select('#startCircle')
+
+    TweenMax.set('svg', {
+        visibility: 'visible'
+    })
+
+    TweenMax.set(outerRing, {
+        drawSVG: '0% 0%',
+        transformOrigin: '50% 50%',
+        rotation: -120
+    })
+    TweenMax.set(handle, {
+        //drawSVG:'0% 0%',
+        svgOrigin: '400 300',
+        rotation: 0
+    })
+
+
+    TweenMax.set(startCircle, {
+        transformOrigin: '50% 50%'
+    })
+
+    var tl = new TimelineMax({
+        paused: false, repeat: -1, repeatDelay: 1
+    });
+    tl.to(startCircle, 1, {
+        attr: {
+            //cx:427,
+            cy: 209
+        },
+        ease: Back.easeOut.config(6)
+    })
+        .to(startCircle, 1, {
+            attr: {
+                cx: 427
+            },
+            //ease:Back.easeIn.config(5)
+            ease: Back.easeIn.config(30)
+        }, '-=1')
+        .to(startCircle, 1, {
+            attr: {
+                r: 11
+            }
+
+        }, '-=1')
+        .set(startCircle, {
+            alpha: 0
+        })
+        .to(outerRing, 2, {
+            drawSVG: '100% 0%',
+            rotation: 10,
+            ease: Power3.easeOut
+        })
+        .from(handle, 1, {
+            drawSVG: '0% 0%',
+            ease: Expo.easeOut
+        }, '-=1.3')
+        .from(handle, 1.15, {
+            rotation: -110,
+            ease: Expo.easeOut
+        }, '-=1.3')
+        .from('#shine', 1, {
+            drawSVG: '100% 100%',
+            //scale:0.8,
+            rotation: -130,
+            svgOrigin: '400 300',
+            ease: Circ.easeOut
+        }, '-=1.3')
+
+        //.addPause()
+
+        .to(handle, 1, {
+            drawSVG: '10% 10%',
+            x: '-=30',
+            y: '-=30',
+            delay: 1,
+            ease: Back.easeIn
+        })
+        .to(outerRing, 1, {
+            strokeWidth: 200,
+            scale: 0.48,
+            rotation: 0,
+            ease: Power3.easeInOut
+        }, '-=0.5')
+        .set(startCircle, {
+            attr: {
+                cx: 400,
+                cy: 300,
+                r: 94.4
+            },
+            alpha: 0
+        }, '-=1')
+        .set(outerRing, {
+            alpha: 0
+        })
+        .to(startCircle, 0.3, {
+            alpha: 1
+        }, '-=0.3')
+        .to('#shine', 0.6, {
+            scale: 0,
+            svgOrigin: '400 300',
+            ease: Circ.easeIn
+        }, '-=1')
+
+    /* hit.onclick = function(e) {
+      if (tl.time() == tl.duration()) {
+        tl.play(0);
+      } else {
+        tl.resume()
+
+      }
+    }
+     */
+    tl.timeScale(1.2);
+//TweenMax.globalTimeScale(0.5)</script>

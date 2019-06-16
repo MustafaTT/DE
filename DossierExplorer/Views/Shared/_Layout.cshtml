@@ -1,0 +1,147 @@
+﻿
+<style>
+
+    body {
+        background-color: #FFF;
+       background-image: url('../Content/images/back123.jpg');
+        overflow-y: auto;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    body,
+    html {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    @*@Styles.Render("~/FileExplorer/Content/themes/ui-lightness/css", "~/Content/css")*@
+    @Scripts.Render("~/Scripts/js")
+    @*<script src="~/LuceneIndex/ScriptsForLucenePages/jquery-3.3.1.min.js"></script>
+        <script src="~/LuceneIndex/ScriptsForLucenePages/jquery.unobtrusive-ajax.min.custom.lucene.js"></script>*@
+    <script src="~/LuceneIndex/ScriptsForLucenePages/popper.js"></script>
+    @Scripts.Render("~/Scripts/bootstrap")
+    @Styles.Render("~/Content/bootstrap")
+    <link href="~/Content/Datatables/bootstrap.datatables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/jquery.ext.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/bootstrap.datatables.js"></script>
+
+    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center navbar-dark bg-primary">
+
+
+        <a href="/">
+
+            <img src="~/Content/Icon/vectorpaint .png" href="/" style="width:110px;height:85px;" />
+        </a>
+
+
+        <a href="/" class="navbar-brand d-flex w-50 mr-auto">DossExp</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+            <ul class="navbar-nav w-100 justify-content-center inlineList" style="display:table; width:70%">
+                <li class="nav-item active" style="display:table-cell; width: 10%">
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @style = "color:white;" })
+                </li>
+                <li class="nav-item" style="display:table-cell; width: 10%">
+                    @Html.ActionLink("File Browser", "Files", "Home", null, new { @style = "color:white;" })
+                </li>
+                <li class="nav-item active" style="display:table-cell;width: 10%">
+                    @Html.ActionLink("Search", "LuceneIndex", "LuceneIndex", null, new { @style = "color:white;" })
+                </li>
+                <li class="nav-item" style="display:table-cell;width: 10%">
+                    @Html.ActionLink("Dashboard", "Dashboard", "Home", null, new { @style = "color:white;" })
+                </li>
+                @*<li class="nav-item" style="display:table-cell;width: 10%">
+                        @Html.ActionLink("Browser", "Browser", "Home", null, new { @style = "color:white;" })
+                    </li>
+                    <li class="nav-item" style="display:table-cell;width: 10%">
+                        @Html.ActionLink("About", "About", "Home", null, new { @style = "color:white;" })
+                    </li>
+                    <li class="nav-item" style="display:table-cell;width: 10%">
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @style = "color:white;" })
+                    </li>*@
+                <li class="nav-item active" style="display:table-cell;width: 10%">
+                    <button type="button" class="btn btn-primary modal-link ShortCutsInfo glyphicon glyphicon-question-sign " style="border-radius:20px; font-size:10px; " data-targeturl="@Url.Action("FileBrowserInfo","LuceneIndex")">
+                        !
+                    </button>
+
+                    <div id="modal fade" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="modal-content">
+                                <div class="modal-body"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item active justify-content-center" style="display:table-cell;width: 40%">
+                    @Html.Partial("_LoginPartial")
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+
+    $(function () {
+        $('body').on('click', '.ShortCutsInfo', function (e) {
+            e.preventDefault();
+            $("#modal-container").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="modal-container" class="modal fade">  <div class="modal-dialog modal-lg" style="width:400px; " >' +
+                    '<div class="modal-content" id= "modalbody" >' +
+                    data +
+                    '</div></div></div>').modal();
+            });
+        });
+    });
+
+
+
+
+</script>

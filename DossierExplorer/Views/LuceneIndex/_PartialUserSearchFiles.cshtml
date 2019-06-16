@@ -1,0 +1,273 @@
+﻿
+
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<DossierExplorer.ViewModels.IndexRecordViewModel>
+
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover({ trigger: "hover" })
+    })
+</script>
+
+@{ int rowNo = 0; }
+
+<div class="table-responsive" >
+    <table id="DataTable" class="table col-xl-12 table-hover ">
+
+        <thead>
+            <tr>
+    
+                <th class="col" scope="col" style="width: 5%">#</th>
+                <th class="col" scope="col" style="width: 30%">Name</th>
+                <th class="col-6" scope="col" style="width: 35%">Directory</th>
+               
+                <th class="col" style="width: 30%">
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight">
+                            <input type="checkbox" id="checkBoxAll" class="custom-checkbox" />
+                        </div>
+                        
+
+                        <div class="p-2 bd-highlight">
+                            <input type="submit" class="btn-group-sm btn-primary" id="DelTag" value="-">
+                        </div>
+                        <div class="p-2 bd-highlight" >
+                        <input type="submit" class="btn-group-sm btn-primary" id="AddTag" value="+">
+                        </div>
+
+                        <div class="p-2 bd-highlight">
+                      
+                               
+                                <input id="Tag" name="Tag" type="text" value="" tabindex="1" placeholder="Add Remove Tag"/>
+                           
+
+
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    
+                </th>
+                
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+
+         
+
+            <tr data-id="@item.fullpath">
+        
+                <td style="width: 1%" class="col">@(rowNo += 1)</td>
+
+                <td style="width: 15%" class="col">
+
+
+                    <span href="#" data-toggle="popover" data-html="true" data-content="<div><div>Created:@Html.DisplayFor(modelItem => item.create_time)</div><div>Modified:@Html.DisplayFor(modelItem => item.lmodified_time)</div><div>Accessed:@Html.DisplayFor(modelItem => item.laccess_time)</div><div>Size:@Html.DisplayFor(modelItem => item.size)</div>">@Html.DisplayFor(modelItem => item.name)</span>
+
+                   
+
+
+
+
+                </td>
+                <td style="width: 50%" class="col">
+                    <span href="#" data-toggle="popover" data-html="true" data-content="<div><div>Created:@Html.DisplayFor(modelItem => item.create_time)</div><div>Modified:@Html.DisplayFor(modelItem => item.lmodified_time)</div><div>Accessed:@Html.DisplayFor(modelItem => item.laccess_time)</div><div>Size:@Html.DisplayFor(modelItem => item.size)</div>">@Html.DisplayFor(modelItem => item.display_directory)</span>
+
+                </td>
+
+
+                <td style="width: 20%" class="col">
+
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight">
+
+
+                            <input type="checkbox" name="TagCheckBox" value="@item.fullpath" class="custom-checkbox chkCheckBoxId" />
+                        </div>
+
+
+
+                        <div class="p-2 bd-highlight">
+
+
+
+                         
+                            
+                            <button type="button" class="btn btn-primary" value="Text" onclick="window.open('@Url.Action("Folder","Home",new { subFolder = item.display_directory  })',target='_blank');return false;">         
+                               Open Folder
+                            </button>
+
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <button type="button" class="btn btn-primary modal-link IndexContent"data-targeturl="@Url.Action("_PartialContent","LuceneIndex",new { fullpath = @item.fullpath })">
+                                View Content
+                            </button>
+</div></div>
+                          
+
+
+                </td>
+
+              
+               
+
+
+
+
+
+
+   
+
+            </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+<div id="myPager" class="col-xl-12">
+    <nav aria-label="Pagination alignment">
+        @Html.PagedListPager(
+             Model,
+             Page => Url.Action(
+                 "LuceneIndex",
+                 new
+                 {
+                     Page = Page
+                 }
+             )
+             , new PagedListRenderOptions
+             {
+                 LinkToFirstPageFormat = "<< First",
+                 LinkToPreviousPageFormat = "< Previous",
+                 LinkToNextPageFormat = "Next >",
+                 LinkToLastPageFormat = "Last >>",
+
+                 UlElementClasses = new[] { "pagination justify-content-center" },
+                 LiElementClasses = new[] { "page-item " },
+                 FunctionToTransformEachPageLink = (liTag, aTag) => { aTag.Attributes.Add("class", "page-link".ToString()); return aTag; }
+
+             }
+         )
+    </nav>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#DataTable').DataTable();
+        $('#checkBoxAll').click(function () {
+            if ($(this).is(":checked")) {
+                $(".chkCheckBoxId").prop("checked", true)
+            }
+            else {
+                $(".chkCheckBoxId").prop("checked", false)
+            }
+        });
+    });
+
+
+
+</script>
+
+
+
+
+
+
+<script>
+ 
+    var Page;
+    $(function () {
+        $('#myPager').on('click', 'a', function ()
+        {
+            var URL = $(this).attr('href');
+            var query = URL.split('?');
+            var dim = query[1].split('&');
+            Page = dim[0].split('=')[1];
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+                data:{"Page":Page},
+                cache: false,
+            });
+            reflesh();
+            return false;
+
+        });
+    });
+
+
+    $('#AddTag').click(function () {
+       
+        var Paths = $("input:checkbox[name=TagCheckBox]:checked").map(function () {
+            return $(this).val();
+        }).toArray();
+        
+        var TagReg = new RegExp(/^[a-zA-Z0-9_+-]*$/i);
+        Tag = $("#Tag").val();
+
+        if (!TagReg.test(Tag)) {
+            alert('Tag may only contain alphanumeric characters! ');
+
+            return false;
+        }
+
+
+
+       
+        $.ajax({
+            type: 'POST',
+            url: '/LuceneIndex/AddTag',
+            data: JSON.stringify({ paths: Paths , tag: Tag }),
+            contentType: 'application/json',
+            success: function (result) {
+                refleshTags();
+            }
+            //error: function (err, result) {
+            //    alert("Error in AddTag" + err.responseText);
+            //}
+
+        });
+     
+        return false;
+    });
+
+
+    $('#DelTag').click(function () {
+
+        var Paths = $("input:checkbox[name=TagCheckBox]:checked").map(function () {
+            return $(this).val();
+        }).toArray();
+        Tag = $("#Tag").val();
+      
+
+        $.ajax({
+            type: 'POST',
+            url: '/LuceneIndex/DeleteTag',
+            data: JSON.stringify({ paths: Paths, tag: Tag }),
+            contentType: 'application/json',
+            success: function (result) {
+                refleshTags();
+            }
+            //error: function (err, result) {
+            //    alert("Error in AddTag" + err.responseText);
+            //}
+        });
+       
+        return false;
+    });
+
+
+</script>
+

@@ -1,0 +1,152 @@
+﻿@using DossierExplorer.ViewModels
+
+@model FileViewModel
+
+@{
+    ViewBag.Title = "Files";
+}
+
+
+@* Bundles with elFinder's CSS and JavaScript files configured in App_Start\BundleConfig.cs*@
+
+@*@Styles.Render("~/FileExplorer/Content/themes/ui-lightness/css", "~/Content/css")*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <link href="~/FileExplorer/Content/themes/ui-default/jquery-ui.1.12.1.css" rel="stylesheet" />*@
+@*@Scripts.Render("~/FileExplorer/Scripts/js")*@
+<script src="~/FileExplorer/Scripts/jquery-ui-1.10.2.min.js"></script>
+@Styles.Render("~/FileExplorer/Content/elfinder")
+@Scripts.Render("~/FileExplorer/Scripts/elfinder")
+<link href="~/FileExplorer/Content/themes/MyThemes/Material/css/theme-light.min.css" rel="stylesheet" />
+<style>
+    /*.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-size: 0.5em !important;
+        font-weight: normal !important;
+    }*/
+
+    .elfinder .elfinder-button {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 20px;
+        float: inherit;
+        overflow: hidden;
+        position: relative;
+        border: 0 solid;
+        margin-top: 100%;
+    }
+    /*.elfinder-button-icon {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 2%;
+        margin-top:10%;
+    }*/
+    .ui-state-default.elfinder-button {
+        width: 30px;
+        height: 30px;
+        padding: 2%;
+    }
+
+    .ui-helper-clearfix.ui-widget-header.ui-corner-top.elfinder-toolbar {
+        padding: 0;
+        margin-top: 1px;
+        height: 8%;
+        width: 100%;
+        list-style: none;
+        display: -webkit-inline-box;
+        display: -moz-inline-box;
+        display: -ms-inline-flexbox;
+        display: -webkit-flex;
+        display: inline-flex;
+        -webkit-flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+    .ui-widget-content.ui-corner-all.elfinder-buttonset {
+        padding: 5px;
+        width: 2%;
+        margin-top: 0px;
+        /*color: white;*/
+        font-weight: bold;
+        /*font-size: 3em;*/
+        text-align: center
+        /*word-break: break-all;*/
+    }
+</style>
+<script type="text/javascript">
+
+    var heightbrowser = parseInt($(window).height())*(0.91);
+    var widthbrowser = parseInt($(window).width()) * (0.9835);
+    $(function ()
+    {
+        var myCommands = elFinder.prototype._options.commands;
+
+        var disabled = ['extract', 'archive', 'resize', 'help', 'select','duplicate','mkfile']; // Not yet implemented commands in ElFinder.Net
+
+        $.each(disabled, function (i, cmd)
+        {
+            (idx = $.inArray(cmd, myCommands)) !== -1 && myCommands.splice(idx, 1);
+        });
+
+        var selectedFile = null;
+
+        var options = {
+            url: '/connector', // connector route defined in \App_Start\RouteConfig.cs
+            customData: { folder: '@Model.Folder', subFolder: '@Model.SubFolder' }, // customData passed in every request to the connector as query strings. These values are used in FileController's Index method.
+            rememberLastDir: false, // Prevent elFinder saving in the Browser LocalStorage the last visited directory
+            commands: myCommands,
+            //lang: 'pt_BR', // elFinder supports UI and messages localization. Check the folder Content\elfinder\js\i18n for all available languages. Be sure to include the corresponding .js file(s) in the JavaScript bundle.
+            uiOptions: { // UI buttons available to the user
+                toolbar: [
+                    ['back'],[ 'forward'],
+                    ['reload'],
+                    ['home'],[ 'up'],
+                    ['mkdir'],[ 'mkfile'],[ 'upload'],
+                    ['open'],['download'],
+                    ['info'],
+                    ['quicklook'],
+                    ['copy'],[ 'cut'],[ 'paste'],
+                    ['rm'],
+                    ['duplicate'],[ 'rename'],[ 'edit'],
+                    ['view'],['sort']
+                ]
+
+            },
+            height: heightbrowser,
+            width: widthbrowser,
+
+            handlers: {
+                select: function (event, elfinderInstance)
+                {
+
+                    if (event.data.selected.length == 1)
+                    {
+                        var item = $('#' + event.data.selected[0]);
+                        if (!item.hasClass('directory'))
+                        {
+                            selectedFile = event.data.selected[0];
+                            $('#elfinder-selectFile').show();
+                            return;
+                        }
+                    }
+                    $('#elfinder-selectFile').hide();
+                    selectedFile = null;
+                }
+            }
+        };
+        $('#elfinder').elfinder(options).elfinder('instance');
+
+        $('.elfinder-toolbar:first').append('<div class="ui-widget-content ui-corner-all elfinder-buttonset" id="elfinder-selectFile" style="display:none; float:right;">' +
+        '<div class="ui-state-default elfinder-button" title="Select" "></div>');
+        $('#elfinder-selectFile').click(function ()
+        {
+            if (selectedFile != null)
+                $.post('file/selectFile', { target: selectedFile }, function (response)
+                {
+                    alert(response);
+                });
+
+        });
+    });
+</script>
+<div id="elfinder"></div>

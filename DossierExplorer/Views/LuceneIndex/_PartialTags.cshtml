@@ -1,0 +1,180 @@
+﻿@model List<DossierExplorer.ViewModels.TagViewModel>
+
+<style>
+    .table-borderless td,
+    .table-borderless th {
+        border: 0;
+
+    }
+
+</style>
+<div style="margin-left:50px; margin-right:-50px">
+    <div class="row " style="margin-top:50px">
+        <table class="col-xl-12">
+
+            <tr>
+                <td class="col-xl-12 text-center" style="font-size:35px" a>
+                    Tags
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="table table-borderless table-condensed table-hover">
+        <table id="DataTable" class="table col-xl-12 hover ">
+
+            <thead>
+                <tr>
+                    <th style="font-size:20px">
+                        <div class="d-flex flex-row bd-highlight ">
+                            <div class="p-2 bd-highlight CategoryAllCheckbox">
+                                <input type="checkbox" id="checkBoxAllCategory" class="custom-checkbox" />
+                            </div>
+                            <div class="p-2 bd-highlight ">
+                                All
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex flex-row bd-highlight">
+
+                                <div class="p-2 bd-highlight CategoryCheckbox">
+
+                                    <input type="checkbox" name="TagCheckBoxCategory" value="@item.tag" class="custom-checkbox chkCheckBoxIdForCategory" />
+
+
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    @item.tag
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+        <script type="text/javascript">
+    $(document).ready(function () {
+        //$('#DataTable').DataTable();
+        $('#checkBoxAllCategory').click(function () {
+            if ($(this).is(":checked")) {
+                $(".chkCheckBoxIdForCategory").prop("checked", true)
+            }
+            else {
+                $(".chkCheckBoxIdForCategory").prop("checked", false)
+            }
+        });
+    });
+
+            $(".CategoryCheckbox").click(function () {
+
+                var TagsPartial= $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+                    return $(this).val();
+                }).toArray();
+
+                //var TagReg = new RegExp(/^[a-zA-Z0-9]*$/i);
+                //Tag = $("#Tag").val();
+
+                //if (!TagReg.test(Tag)) {
+                //    alert('Tag may only contain alphanumeric characters! ');
+                //    return false;
+                //}
+                SearchTerm = $("#Search").val();
+                var SearchField = $("#SearchField").val();
+                var RecordCount = $("#RecordCount").val();
+                var SortOrder = $("#SortOrder").val();
+                Page = 1;
+                var SetData = $("#DataSearching");
+                SetData.html("");
+
+                   $.ajax({
+                       type: "POST",
+                       url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+                       data: {
+                           "Tags": TagsPartial,
+                           "SearchTerm": SearchTerm,
+                           "SearchField": SearchField,
+                           "RecordCount": RecordCount,
+                           "SortOrder": SortOrder,
+                           "Page":Page
+
+                           //"Sirala": FirmaSirala,
+                           //"KayitSayisi": KayitSayisi,
+                           //"Sayfa": Sayfa
+                       },
+                       success: function (data) {
+                           $("#divFiles").html(data);
+                       },
+                       error:function(data){
+                           //alert("Veri Yenileme Hatası");
+                           document.getElementById("divFiles").innerHTML = "No search index records found...";
+                       }
+
+
+
+                });
+
+            });
+
+            $(".CategoryAllCheckbox").click(function () {
+
+                var TagsPartial= $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+                    return $(this).val();
+                }).toArray();
+
+                //var TagReg = new RegExp(/^[a-zA-Z0-9]*$/i);
+                //Tag = $("#Tag").val();
+
+                //if (!TagReg.test(Tag)) {
+                //    alert('Tag may only contain alphanumeric characters! ');
+                //    return false;
+                //}
+                SearchTerm = $("#Search").val();
+                var SearchField = $("#SearchField").val();
+                var RecordCount = $("#RecordCount").val();
+                var SortOrder = $("#SortOrder").val();
+                Page = 1;
+                var SetData = $("#DataSearching");
+                SetData.html("");
+
+                   $.ajax({
+                       type: "POST",
+                       url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+                       data: {
+                           "Tags": TagsPartial,
+                           "SearchTerm": SearchTerm,
+                           "SearchField": SearchField,
+                           "RecordCount": RecordCount,
+                           "SortOrder": SortOrder,
+                           "Page":Page
+
+                           //"Sirala": FirmaSirala,
+                           //"KayitSayisi": KayitSayisi,
+                           //"Sayfa": Sayfa
+                       },
+                       success: function (data) {
+                           $("#divFiles").html(data);
+                       },
+                       error:function(data){
+                           //alert("Veri Yenileme Hatası");
+                           document.getElementById("divFiles").innerHTML = "No search index records found...";
+                       }
+
+
+
+                });
+
+            });
+
+
+
+        </script>

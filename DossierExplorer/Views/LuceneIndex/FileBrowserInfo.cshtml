@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "";
+}
+<style>
+    .modal-body {
+        overflow: hidden;
+        background: scroll;
+        height: 750px;
+    }
+
+        .modal-body:hover {
+            overflow-y: auto;
+        }
+
+    .modal-header {
+        background-color: steelblue;
+        color: white;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">CLOSE</span>
+            </button>
+        </div>
+        <div class="p-2 bd-highlight">
+
+
+            <h4 class="modal-title" id="myModalLabel"> Browser Shortcuts</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+
+        <pre>
+CTRL+DOWN : Open
+NUMPAD_ENTER : Open
+ENTER : Open
+CTRL+SHIFT+R  :Reload
+F5 : Reload
+CTRL+HOME : Home
+CTRL+SHIFT+UP : Home
+CTRL+UP : Go to parent directory
+CTRL+LEFT : Back
+BACKSPACE  :Back
+CTRL+RIGHT : Forward
+SPACE : Preview
+SHIFT+ENTER : Download
+DELETE : Delete
+CTRL+BACKSPACE : Delete
+F2 : Rename
+CTRL+SHIFT+N : New folder
+CTRL+U : Upload files
+CTRL+C : Copy
+CTRL+X : Cut
+CTRL+V : Paste
+CTRL+E : Edit file
+CTRL+I : Get info
+CTRL+A : Select all files
+
+</pre>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+    </div>
+</div>

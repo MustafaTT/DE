@@ -1,0 +1,336 @@
+﻿@*@model DMSdb.Model.DocDataModel*@
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    /**/
+
+    ViewBag.Title = "LuceneIndex";
+}
+
+
+
+
+
+
+
+<div class="row d-flex flex-row bd-highlight ">
+    <div class="p-2 bd-highlight" id="divTags"></div>
+
+
+
+    <div class="container p-2 bd-highlight">
+        <div class="row">
+            <table class="col-xl-12">
+                <tr>
+                    <td class="col-xl-3">
+                        @Html.TextBox("Search", "", new { placeholder = "Search" })<input type="submit" class="btn-primary" id="SearchBtn" value="Search">
+                    </td>
+                    <td>Search Field</td>
+                    <td class="col-xl-3">
+                        <select class="form-control-sm" id="SearchField">
+                            <option value="">All Fields</option>
+
+                            <option value="Name">Name</option>
+
+                            <option value="DisplayDirectory">Directory</option>
+
+                            <option value="Content">Content</option>
+                            <option value="Extension">Extension</option>
+                            <option value="Tag">Tag</option>
+                        </select>
+                    </td>
+                    <td>Count:</td>
+                    <td class="col-xl-3">
+                        <select class="form-control-sm " id="RecordCount">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="All">All</option>
+                        </select>
+                    </td>
+                    <td>Order By:</td>
+                    <td class="col-xl-3">
+                        <select class="form-control-sm" id="SortOrder">
+                            <option value="AZ">A-Z</option>
+                            <option value="ZA">Z-A</option>
+                            <option value="CT+">Created Ascending</option>
+                            <option value="CT-">Created Descending</option>
+                            <option value="MT+">Modified Ascending</option>
+                            <option value="MT-">Modified Descending</option>
+                            <option value="S+">Size Ascending</option>
+                            <option value="S-">Size Descending</option>
+                        </select>
+                    </td>
+
+                    <td>
+
+
+
+
+                        <div class="p-2 bd-highlight">
+                            <button type="button" class="btn btn-outline-primary modal-link SearchInfo" style="border-radius:20px; font-size:15px; " data-targeturl="@Url.Action("SearchInfo","LuceneIndex")">
+                                ?
+                            </button>
+
+                        </div>
+
+                    </td>
+
+
+                </tr>
+            </table>
+        </div>
+        <div align="center" id="divFiles" class="row"></div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var SearchTerm;
+    var Page;
+
+     function reflesh()
+    {
+        RecordCount = $("#RecordCount").val();
+        SearchTerm = $("#Search").val();
+          SearchField = $("#SearchField").val();
+         RecordCount = $("#RecordCount").val();
+         SortOrder = $("#SortOrder").val();
+         TagsPartial = $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+             return $(this).val();
+         }).toArray();
+
+
+        $.ajax
+            ({
+            url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+            type: 'POST',
+                data: {
+                    "Tags": TagsPartial,
+                "SearchTerm": SearchTerm,
+                "searchField": SearchField,
+                "RecordCount": RecordCount,
+                "SortOrder": SortOrder,
+                "Page": Page
+
+            },
+                success: function (data) {
+                    $('[data-toggle="popover"]').popover('hide');
+                $("#divFiles").html(data);
+                
+            },
+            error: function (data) {
+                document.getElementById("divFiles").innerHTML = "No search index records found...."+"  Error.";
+            }
+        });
+    }
+  function refleshTags()
+    {
+      
+
+
+        $.ajax
+            ({
+            url: '@Url.Action("_PartialTags", "LuceneIndex")',
+            type: 'POST',
+
+            success: function (data) {
+                $("#divTags").html(data);
+            },
+            error: function (data) {
+                document.getElementById("divTags").innerHTML = "No search index records found...."+"  Error.";
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('.grid tr:even').css("background", "#009de6");
+        var SearchTerm = $("#Search").val();
+        var SearchField = $("#SearchField").val();
+        var RecordCount = 10;
+        var SortOrder = "AZ";
+        var TagsPartial = $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+            return $(this).val();
+        }).toArray();
+        $('.grid tr:even').css("background", "#009de6");
+
+        $.ajax({
+            url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+            data: {
+                "Tags": TagsPartial,
+                "SearchTerm": SearchTerm,
+                "SearchField": SearchField,
+                "RecordCount": RecordCount,
+                "Page": 1,
+                "SortOrder": SortOrder,},
+            type: 'POST',
+            success: function (data) {
+                $("#divFiles").html(data);
+            },
+            error:function(data){
+
+                alert("Error");
+            }
+        });
+    })
+
+         $(document).ready(function () {
+        
+        $.ajax({
+            url: '@Url.Action("_PartialTags", "LuceneIndex")',
+          
+            type: 'POST',
+            success: function (data) {
+                $("#divTags").html(data);
+            },
+            error:function(data){
+
+                alert("Error");
+            }
+        });
+    })
+</script>
+
+
+<script type="text/javascript">
+     $("#SearchBtn").click(function ()
+    {
+        SearchTerm = $("#Search").val();
+         var SearchField = $("#SearchField").val();
+         var RecordCount = $("#RecordCount").val();
+         var SortOrder = $("#SortOrder").val();
+         TagsPartial = $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+             return $(this).val();
+         }).toArray();
+         Page = 1;
+                   var SetData = $("#DataSearching");
+                   SetData.html("");
+                   $.ajax({
+                       type: "POST",
+                       url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+                       data: {
+                           "Tags": TagsPartial,
+                           "SearchTerm": SearchTerm,
+                           "SearchField": SearchField,
+                           "RecordCount": RecordCount,
+                           "SortOrder": SortOrder,
+                           "Page":Page
+
+                       
+                       },
+                       success: function (data) {
+                           $("#divFiles").html(data);
+                       },
+                       error:function(data){
+                           //alert("Veri Yenileme Hatası");
+                           document.getElementById("divFiles").innerHTML = "No search index records found...";
+                       }
+                   });
+
+    });
+        $("#RecordCount").change(function ()
+    {
+
+        SearchTerm = $("#Search").val();
+            SearchField = $("#SearchField").val();
+            RecordCount = $("#RecordCount").val();
+            SortOrder = $("#SortOrder").val();
+            TagsPartial = $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+                return $(this).val();
+            }).toArray();
+        var SetData = $("#DataSearching");
+        SetData.html("");
+        $.ajax
+            ({
+       type: "POST",
+       url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+                data: {
+                    "Tags": TagsPartial,
+           "SearchTerm": SearchTerm,
+           "SearchField": SearchField,
+           "RecordCount": RecordCount,
+           "SortOrder": SortOrder,
+           "Page": Page
+       },
+       success: function (data) {
+           $("#divFiles").html(data);
+       },
+       error:function(data){
+           document.getElementById("divFiles").innerHTML = "No search index records found...";
+       }
+   });
+        Page= 1;
+
+    });
+           $("#SortOrder").change(function ()
+    {
+
+        SearchTerm = $("#Search").val();
+            SearchField = $("#SearchField").val();
+            RecordCount = $("#RecordCount").val();
+               SortOrder = $("#SortOrder").val();
+               TagsPartial = $("input:checkbox[name=TagCheckBoxCategory]:checked").map(function () {
+                   return $(this).val();
+               }).toArray();
+        var SetData = $("#DataSearching");
+        SetData.html("");
+        $.ajax
+            ({
+       type: "POST",
+       url: '@Url.Action("_PartialUserSearchFiles", "LuceneIndex")',
+                data: {
+                    "Tags": TagsPartial,
+           "SearchTerm": SearchTerm,
+           "SearchField": SearchField,
+           "RecordCount": RecordCount,
+           "SortOrder": SortOrder,
+           "Page": Page
+       },
+       success: function (data) {
+           $("#divFiles").html(data);
+       },
+       error:function(data){
+           document.getElementById("divFiles").innerHTML = "No search index records found...";
+       }
+   });
+
+
+        });
+
+
+
+        $(function () {
+            $('body').on('click', '.SearchInfo', function (e) {
+                e.preventDefault();
+                $("#modal-container").remove();
+                $.get($(this).data("targeturl"), function (data) {
+                    $('<div id="modal-container" class="modal fade">  <div class="modal-dialog modal-lg" style="width:800px;">' +
+                        '<div class="modal-content" id= "modalbody" >' +
+                        data +
+                        '</div></div></div>').modal();
+                });
+            });
+        });
+
+        $(function () {
+            $('body').on('click', '.IndexContent', function (e) {
+
+                e.preventDefault();
+                $("#modal-container").remove();
+                $.get($(this).data("targeturl"), function (data) {
+                    $('<div id="modal-container" class="modal fade">  <div class="modal-dialog modal-lg" style="width:800px; height 800px;>' +
+                        '<div class="modal-content" id= "modalbody" >' +
+                        data +
+                        '</div></div></div>').modal();
+                });
+            });
+        });
+
+
+
+
+
+</script>
+
