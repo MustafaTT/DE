@@ -1,0 +1,8 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DossierExplorer.Api", "DossierExplorer.Api\DossierExplorer.Api.csproj", "{E1111111-1111-1111-1111-111111111111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DossierExplorer.Application", "DossierExplorer.Application\DossierExplorer.Application.csproj", "{E2222222-2222-2222-2222-222222222222}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DossierExplorer.Domain", "DossierExplorer.Domain\DossierExplorer.Domain.csproj", "{E3333333-3333-3333-3333-333333333333}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DossierExplorer.Infrastructure", "DossierExplorer.Infrastructure\DossierExplorer.Infrastructure.csproj", "{E4444444-4444-4444-4444-444444444444}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DossierExplorer.OcrService", "DossierExplorer.OcrService\DossierExplorer.OcrService.csproj", "{E5555555-5555-5555-5555-555555555555}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DossierExplorer.SearchService", "DossierExplorer.SearchService\DossierExplorer.SearchService.csproj", "{E6666666-6666-6666-6666-666666666666}"
+EndProject
